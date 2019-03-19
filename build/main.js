@@ -125,11 +125,16 @@ var HomePage = /** @class */ (function () {
         };
     };
     HomePage.prototype.loca = function () {
-        navigator.geolocation.getCurrentPosition(function (position) {
+        console.log('location');
+        var onSuccess = function (position) {
+            console.log('ok');
             console.log(position);
-        }, function (err) {
-            console.log(err);
-        });
+        };
+        var onError = function (error) {
+            console.log('err');
+            console.log(error);
+        };
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
     };
     HomePage.prototype.activar2 = function () {
         var _this = this;
