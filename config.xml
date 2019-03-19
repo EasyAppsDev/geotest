@@ -40,25 +40,22 @@
 
   <preference name="android-minSdkVersion" value="19"/>
       <preference name="android-targetSdkVersion"   value="26" />     
+
+          <platform name="android">
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-feature android:name="android.hardware.location.gps" />
+        </config-file>
+    </platform>
+
+    
   <plugin name="cordova-plugin-add-swift-support" spec="1.7.2" />
 
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
      
 
-
-
-    <plugin name="cordova-plugin-googlemaps" source="npm" version="2.4.5" >
-
-      <variable name="API_KEY_FOR_ANDROID" value="AIzaSyAT-tTbOja69paXaiAgAtNi9nGHRh75bzk" />
-    
-
-
-  </plugin>
-  
-<preference name="AndroidPersistentFileLocation" value="Compatibility" />
-
-  <plugin name="cordova-plugin-request-location-accuracy" source="npm" />
 
       <plugin name="cordova-plugin-geolocation"  />
         <plugin name="cordova-plugin-geofence" spec="^0.7.0" />
