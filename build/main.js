@@ -61,6 +61,26 @@ var HomePage = /** @class */ (function () {
         this.status2 = "";
         this.userData = {};
     }
+    HomePage.prototype.ionViewDidLoad = function () {
+        if (window.geofence) {
+            window.geofence.initialize().then(function (initStatus) {
+                console.log("Geofence Plugin has been initialized", initStatus);
+                window.geofence.onTransitionReceived = function (geofences) {
+                    console.log('s2');
+                    console.log(geofences);
+                    geofences.forEach(function (geo) {
+                        console.log("Geofence transition detected", geo);
+                    });
+                };
+                window.geofence.onNotificationClicked = function (notificationData) {
+                    console.log("App opened from Geo Notification!", notificationData);
+                };
+            }).catch(function (error) {
+                console.error('err');
+                console.error(error);
+            });
+        }
+    };
     /*
     
       constructor(public navCtrl: NavController, private geofence: Geofence) {
@@ -94,10 +114,10 @@ var HomePage = /** @class */ (function () {
             id: '69ca1b88',
             latitude: parseFloat(dd.lat),
             longitude: parseFloat(dd.lon),
-            radius: 1000,
-            transitionType: 3,
+            radius: 2000,
+            transitionType: dd.tipo,
             notification: {
-                id: 2,
+                id: dd.id,
                 title: 'test fogon Prov',
                 text: 'test de geofence fogon de providencia',
                 openAppOnClick: true //open app when notification is tapped
@@ -159,7 +179,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  prueba de push y geofence en un proyecto Ionic\n  <p>\n  esta prueba es para verificar que sobre las librerias para los servicios push y geofence\n  </p>\n\n  <ion-label>\n    {{ status }}\n  </ion-label>\n\n  <ion-label>\n    {{ status2 }}\n  </ion-label>\n\n  <input type="text" name="" [(ngModel)]="userData.lat" style="border:solid 1px red" placeholder="lat">\n   <input type="text" name="" [(ngModel)]="userData.lon" style="border:solid 1px red" placeholder="lon">\n  <button ion-button full (click)="addGeofence(userData)" >Add fence</button>\n    <button ion-button full (click)="ping()" >ping</button>\n        <button ion-button full (click)="oblig()" >oblig</button>\n                <button ion-button full (click)="loca()" >lca</button>\n<!--   <button ion-button full (click)="addGeofence2()" >Add fence2</button>\n    <button ion-button full (click)="addGeofence3()" >Add fence3</button> -->\n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  prueba de push y geofence en un proyecto Ionic\n  <p>\n  esta prueba es para verificar que sobre las librerias para los servicios push y geofence\n  </p>\n\n  <ion-label>\n    {{ status }}\n  </ion-label>\n\n  <ion-label>\n    {{ status2 }}\n  </ion-label>\n\n  <input type="text" name="" [(ngModel)]="userData.lat" style="border:solid 1px red" placeholder="lat">\n   <input type="text" name="" [(ngModel)]="userData.lon" style="border:solid 1px red" placeholder="lon">\n   <br>\n     <input type="number" name="" [(ngModel)]="userData.tipo" style="border:solid 1px red" placeholder="tipo">\n\n        <br>\n     <input type="number" name="" [(ngModel)]="userData.id" style="border:solid 1px red" placeholder="id">\n\n  <button ion-button full (click)="addGeofence(userData)" >Add fence</button>\n    <button ion-button full (click)="ping()" >ping</button>\n        <button ion-button full (click)="oblig()" >oblig</button>\n                <button ion-button full (click)="loca()" >lca</button>\n<!--   <button ion-button full (click)="addGeofence2()" >Add fence2</button>\n    <button ion-button full (click)="addGeofence3()" >Add fence3</button> -->\n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object])
     ], HomePage);
