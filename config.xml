@@ -43,13 +43,13 @@
 
           <platform name="android">
         <config-file parent="/*" target="AndroidManifest.xml">
-            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-            <uses-feature android:name="android.hardware.location.gps" />
+            <uses-permission name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-feature name="android.hardware.location.gps" />
         </config-file>
     </platform>
 
-    
+
   <plugin name="cordova-plugin-add-swift-support" spec="1.7.2" />
 
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
