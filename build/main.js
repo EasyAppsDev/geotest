@@ -66,6 +66,15 @@ var HomePage = /** @class */ (function () {
         // resolved promise does not return a value
         function () {
             console.log('Geofence Plugin Ready');
+            _this.geofence.onTransitionReceived().subscribe(function (res) {
+                console.log('suc!');
+                console.log(res);
+                _this.status2 = 'notificación de geofence';
+            }, function (error) {
+                console.log('err');
+                console.log(error);
+                _this.status2 = 'error en notificacion geofence';
+            });
             _this.addGeofence();
         }, function (err) { return console.log(err); });
     }
@@ -88,7 +97,7 @@ var HomePage = /** @class */ (function () {
         this.geofence.addOrUpdate(fence).then(function () {
             console.log('Geofence added');
             _this.status = 'Geofence added';
-            _this.activar();
+            //this.activar();
         }, function (err) {
             console.log('Geofence failed to add');
             _this.status = 'Geofence failed to add';
@@ -108,9 +117,10 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  prueba de push y geofence en un proyecto Ionic\n  <p>\n  esta prueba es para verificar que sobre las librerias para los servicios push y geofence\n  </p>\n\n  <ion-label>\n    {{ status }}\n  </ion-label>\n\n  <ion-label>\n    {{ status2 }}\n  </ion-label>\n\n\n  <button ion-button full (click)="addGeofence()" >Add fence</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_geofence__["a" /* Geofence */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_geofence__["a" /* Geofence */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_geofence__["a" /* Geofence */]) === "function" && _b || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map
