@@ -130,16 +130,13 @@ var HomePage = /** @class */ (function () {
         };
     };
     HomePage.prototype.loca = function () {
-        console.log('location');
-        var onSuccess = function (position) {
-            console.log('ok');
-            console.log(position);
-        };
-        var onError = function (error) {
-            console.log('err');
+        navigator.geolocation.getCurrentPosition(function (pos) {
+            console.log('truse');
+            console.log(pos);
+        }, function (error) {
+            console.log('some err');
             console.log(error);
-        };
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        }, { enableHighAccuracy: true, timeout: 30000 });
     };
     HomePage.prototype.activar2 = function () {
         var _this = this;
