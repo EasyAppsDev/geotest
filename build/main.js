@@ -94,7 +94,7 @@ var HomePage = /** @class */ (function () {
             id: '69ca1b88',
             latitude: parseFloat(dd.lat),
             longitude: parseFloat(dd.lon),
-            radius: 50,
+            radius: 1000,
             transitionType: 3,
             notification: {
                 id: 2,
@@ -110,6 +110,25 @@ var HomePage = /** @class */ (function () {
         }, function (err) {
             console.log('Geofence failed to add');
             _this.status = 'Geofence failed to add';
+        });
+    };
+    HomePage.prototype.ping = function () {
+        window.geofence.ping();
+    };
+    HomePage.prototype.oblig = function () {
+        window.geofence.onTransitionReceived = function (geofences) {
+            console.log('s2');
+            console.log(geofences);
+            geofences.forEach(function (geo) {
+                console.log("Geofence transition detected", geo);
+            });
+        };
+    };
+    HomePage.prototype.loca = function () {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            console.log(position);
+        }, function (err) {
+            console.log(err);
         });
     };
     HomePage.prototype.activar2 = function () {
@@ -133,7 +152,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  prueba de push y geofence en un proyecto Ionic\n  <p>\n  esta prueba es para verificar que sobre las librerias para los servicios push y geofence\n  </p>\n\n  <ion-label>\n    {{ status }}\n  </ion-label>\n\n  <ion-label>\n    {{ status2 }}\n  </ion-label>\n\n  <input type="text" name="" [(ngModel)]="userData.lat" style="border:solid 1px red" placeholder="lat">\n   <input type="text" name="" [(ngModel)]="userData.lon" style="border:solid 1px red" placeholder="lon">\n  <button ion-button full (click)="addGeofence(userData)" >Add fence</button>\n<!--   <button ion-button full (click)="addGeofence2()" >Add fence2</button>\n    <button ion-button full (click)="addGeofence3()" >Add fence3</button> -->\n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  prueba de push y geofence en un proyecto Ionic\n  <p>\n  esta prueba es para verificar que sobre las librerias para los servicios push y geofence\n  </p>\n\n  <ion-label>\n    {{ status }}\n  </ion-label>\n\n  <ion-label>\n    {{ status2 }}\n  </ion-label>\n\n  <input type="text" name="" [(ngModel)]="userData.lat" style="border:solid 1px red" placeholder="lat">\n   <input type="text" name="" [(ngModel)]="userData.lon" style="border:solid 1px red" placeholder="lon">\n  <button ion-button full (click)="addGeofence(userData)" >Add fence</button>\n    <button ion-button full (click)="ping()" >ping</button>\n        <button ion-button full (click)="oblig()" >oblig</button>\n                <button ion-button full (click)="loca()" >lca</button>\n<!--   <button ion-button full (click)="addGeofence2()" >Add fence2</button>\n    <button ion-button full (click)="addGeofence3()" >Add fence3</button> -->\n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object])
     ], HomePage);
