@@ -66,14 +66,10 @@ var HomePage = /** @class */ (function () {
         // resolved promise does not return a value
         function () {
             console.log('Geofence Plugin Ready');
-            _this.geofence.onTransitionReceived().subscribe(function (res) {
+            geofence.onTransitionReceived(function (res) {
                 console.log('suc!');
                 console.log(res);
                 _this.status2 = 'notificación de geofence';
-            }, function (error) {
-                console.log('err');
-                console.log(error);
-                _this.status2 = 'error en notificacion geofence';
             });
             _this.addGeofence();
         }, function (err) { return console.log(err); });
