@@ -41,7 +41,6 @@ webpackEmptyAsyncContext.id = 150;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geofence__ = __webpack_require__(194);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -53,38 +52,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
+//import { Geofence } from '@ionic-native/geofence';
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, geofence) {
-        var _this = this;
+    function HomePage(navCtrl) {
+        // initialize the plugin
         this.navCtrl = navCtrl;
-        this.geofence = geofence;
         this.status = "";
         this.status2 = "";
+    }
+    HomePage.prototype.ionViewDidLoad = function () {
+        window.geofence.onTransitionReceived = function (geofences) {
+            geofences.forEach(function (geo) {
+                console.log('Geofence transition detected', geo);
+            });
+        };
+        window.geofence.addOrUpdate({
+            id: '69ca1b88-6fbe-4e80-a4d4-ff4d3748acdz',
+            latitude: -33.426143,
+            longitude: -70.620199,
+            radius: 50,
+            transitionType: 3,
+            notification: {
+                id: 2,
+                title: 'test fogon Prov',
+                text: 'test de geofence fogon de providencia',
+                openAppOnClick: true //open app when notification is tapped
+            }
+        }).then(function () {
+            console.log('Geofence successfully added');
+        }, function (error) {
+            console.log('Adding geofence failed', error);
+        });
+    };
+    /*
+    
+      constructor(public navCtrl: NavController, private geofence: Geofence) {
         // initialize the plugin
         geofence.initialize().then(
-        // resolved promise does not return a value
-        function () {
+          // resolved promise does not return a value
+          () => {
             console.log('Geofence Plugin Ready');
-            geofence.onTransitionReceived(function (res) {
-                console.log('suc!');
-                console.log(res);
-                _this.status2 = 'notificación de geofence';
-            });
-            _this.addGeofence();
-        }, function (err) { return console.log(err); });
-    }
+    
+    
+    
+            this.addGeofence();
+          },
+          (err) => console.log(err)
+        )
+    
+      }
+    */
     HomePage.prototype.addGeofence = function () {
         var _this = this;
         //options describing geofence
         var fence = {
-            id: '69ca1b88-6fbe-4e80-a4d4-ff4d3748acdb',
+            id: '69ca1b88-6fbe-4e80-a4d4-ff4d3748acdz',
             latitude: -33.426143,
             longitude: -70.620199,
-            radius: 100,
+            radius: 50,
             transitionType: 3,
             notification: {
-                id: 1,
+                id: 2,
                 title: 'test fogon Prov',
                 text: 'test de geofence fogon de providencia',
                 openAppOnClick: true //open app when notification is tapped
@@ -93,10 +121,19 @@ var HomePage = /** @class */ (function () {
         this.geofence.addOrUpdate(fence).then(function () {
             console.log('Geofence added');
             _this.status = 'Geofence added';
-            //this.activar();
+            _this.activar2();
         }, function (err) {
             console.log('Geofence failed to add');
             _this.status = 'Geofence failed to add';
+        });
+    };
+    HomePage.prototype.activar2 = function () {
+        var _this = this;
+        console.log('act2');
+        this.geofence.onTransitionReceived(function (res) {
+            console.log('suc2!');
+            console.log(res);
+            _this.status2 = 'notificación de geofence';
         });
     };
     HomePage.prototype.activar = function () {
@@ -113,10 +150,10 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  prueba de push y geofence en un proyecto Ionic\n  <p>\n  esta prueba es para verificar que sobre las librerias para los servicios push y geofence\n  </p>\n\n  <ion-label>\n    {{ status }}\n  </ion-label>\n\n  <ion-label>\n    {{ status2 }}\n  </ion-label>\n\n\n  <button ion-button full (click)="addGeofence()" >Add fence</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_geofence__["a" /* Geofence */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_geofence__["a" /* Geofence */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object])
     ], HomePage);
     return HomePage;
-    var _a, _b;
+    var _a;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -229,6 +266,11 @@ var MyApp = /** @class */ (function () {
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
+            window.geofence.initialize().then(function () {
+                console.log("Successful initialization");
+            }, function (error) {
+                console.log("Error", error);
+            });
             statusBar.styleDefault();
             splashScreen.hide();
         });
@@ -236,9 +278,10 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _c || Object])
     ], MyApp);
     return MyApp;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=app.component.js.map
