@@ -113,7 +113,12 @@ var HomePage = /** @class */ (function () {
         });
     };
     HomePage.prototype.ping = function () {
-        window.geofence.ping();
+        window.geofence.initialize().then(function (initStatus) {
+            console.log("Geofence Plugin has been initialized", initStatus);
+        }).catch(function (error) {
+            console.error('err');
+            console.error(error);
+        });
     };
     HomePage.prototype.oblig = function () {
         window.geofence.onTransitionReceived = function (geofences) {
@@ -275,22 +280,28 @@ var MyApp = /** @class */ (function () {
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-            if (window.geofence) {
-                window.geofence.initialize().then(function (initStatus) {
+            /*
+                 if(window.geofence){
+            
+                       window.geofence.initialize().then((initStatus) => {
                     console.log("Geofence Plugin has been initialized", initStatus);
                     window.geofence.onTransitionReceived = function (geofences) {
-                        geofences.forEach(function (geo) {
-                            console.log("Geofence transition detected", geo);
-                        });
+                      geofences.forEach(function (geo) {
+                        console.log("Geofence transition detected", geo);
+                      });
                     };
+            
+            
                     window.geofence.onNotificationClicked = function (notificationData) {
-                        console.log("App opened from Geo Notification!", notificationData);
+                      console.log("App opened from Geo Notification!", notificationData);
                     };
-                }).catch(function (error) {
-                    console.error('err');
+                  }).catch((error) => {
+                  console.error('err');
                     console.error(error);
-                });
-            }
+                  });
+            
+                }
+            */
             statusBar.styleDefault();
             splashScreen.hide();
         });
