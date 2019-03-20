@@ -56,19 +56,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //import { Geofence } from '@ionic-native/geofence';
 var HomePage = /** @class */ (function () {
     function HomePage(navCtrl, plt) {
+        /*
+            this.plt.ready().then((readySource) => {
+              console.log('Platform ready from', readySource);
+              cordova.plugins.backgroundMode.setEnabled(true);
+              cordova.plugins.backgroundMode.on('activate', function() {
+           cordova.plugins.backgroundMode.disableWebViewOptimizations();
+        });
+        cordova.plugins.backgroundMode.overrideBackButton();
+        
+            });
+        
+        
+        */
         this.navCtrl = navCtrl;
         this.plt = plt;
         this.status = "";
         this.status2 = "";
         this.userData = {};
-        this.plt.ready().then(function (readySource) {
-            console.log('Platform ready from', readySource);
-            cordova.plugins.backgroundMode.setEnabled(true);
-            cordova.plugins.backgroundMode.on('activate', function () {
-                cordova.plugins.backgroundMode.disableWebViewOptimizations();
-            });
-            cordova.plugins.backgroundMode.overrideBackButton();
-        });
     }
     HomePage.prototype.addGeofence = function (dd) {
         console.log(parseFloat(dd.lat));
@@ -329,6 +334,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var MyApp = /** @class */ (function () {
     function MyApp(platform, statusBar, splashScreen) {
+        var _this = this;
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
@@ -357,8 +363,54 @@ var MyApp = /** @class */ (function () {
             */
             statusBar.styleDefault();
             splashScreen.hide();
+            _this.getUserPosition();
         });
     }
+    MyApp.prototype.getUserPosition = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            var HIGH_ACCURACY = 'high_accuracy';
+            cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
+                if (enabled) {
+                    cordova.plugins.diagnostic.getLocationMode(function (locationMode) {
+                        if (locationMode === HIGH_ACCURACY) {
+                            navigator.geolocation.watchPosition(function (pos) {
+                                console.log(pos);
+                                resolve({
+                                    coords: {
+                                        latitude: pos.coords.latitude,
+                                        longitude: pos.coords.longitude
+                                    }
+                                });
+                            }, function (error) { resolve(error); }, {
+                                timeout: 30000,
+                                maximumAge: 0,
+                                enableHighAccuracy: true
+                            });
+                        }
+                        else {
+                            _this.askForHighAccuracy().then(function (available) {
+                                if (available) {
+                                    _this.getUserPosition().then(function (a) { return resolve(a); }, function (e) { return resolve(e); });
+                                }
+                            }, function (error) { return resolve(error); });
+                        }
+                    }, function (error) { return resolve(error); });
+                }
+                else {
+                    cordova.plugins.locationAccuracy.request(function (result) {
+                        if (result) {
+                            _this.getUserPosition().then(function (result) { return resolve(result); }, function (error) { return resolve(error); });
+                        }
+                    }, function (error) {
+                        resolve(error);
+                    }, 1);
+                }
+            }, function (error) {
+                resolve(error);
+            });
+        });
+    };
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/app/app.html"*/
         }),
