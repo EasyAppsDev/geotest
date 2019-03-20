@@ -59,7 +59,7 @@
     <param name="ANDROID_SUPPORT_VERSION" value="26.+" />
 </plugin>
 
-
+<plugin name="cordova-plugin-request-location-accuracy" source="npm" />
       <plugin name="cordova-plugin-geolocation"  />
         <plugin name="cordova-plugin-geofence" spec="^0.7.0" />
 

@@ -140,13 +140,21 @@ var HomePage = /** @class */ (function () {
         });
     };
     HomePage.prototype.locaa = function () {
-        navigator.geolocation.getCurrentPosition(function (pos) {
-            console.log('truse');
-            console.log(pos);
-        }, function (error) {
-            console.log('some err');
-            console.log(error);
-        }, { enableHighAccuracy: true, timeout: 30000 });
+        /*
+        
+                navigator.geolocation.getCurrentPosition((pos) => {
+              console.log('truse');
+                  console.log(pos);
+                }, (error) => {
+                  console.log('some err');
+                  console.log(error);
+                },{ enableHighAccuracy: true, timeout: 30000 });
+        
+        */
+        this.getUserPosition().then(function (available) {
+            console.log('here3433');
+            console.log(available);
+        }, function (error) { return console.log(error); });
     };
     HomePage.prototype.activar2 = function () {
         var _this = this;
@@ -165,6 +173,61 @@ var HomePage = /** @class */ (function () {
         }, function (error) {
             console.log(error);
             _this.status2 = 'error en notificacion geofence';
+        });
+    };
+    //cordova.plugins.
+    HomePage.prototype.getUserPosition = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            var HIGH_ACCURACY = 'high_accuracy';
+            cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
+                if (enabled) {
+                    cordova.plugins.diagnostic.getLocationMode(function (locationMode) {
+                        if (locationMode === HIGH_ACCURACY) {
+                            navigator.geolocation.getCurrentPosition(function (pos) {
+                                console.log(pos);
+                                resolve({
+                                    coords: {
+                                        latitude: pos.coords.latitude,
+                                        longitude: pos.coords.longitude
+                                    }
+                                });
+                            }, function (error) { resolve(error); }, {
+                                timeout: 30000,
+                                maximumAge: 0,
+                                enableHighAccuracy: true
+                            });
+                        }
+                        else {
+                            _this.askForHighAccuracy().then(function (available) {
+                                if (available) {
+                                    _this.getUserPosition().then(function (a) { return resolve(a); }, function (e) { return resolve(e); });
+                                }
+                            }, function (error) { return resolve(error); });
+                        }
+                    }, function (error) { return resolve(error); });
+                }
+                else {
+                    cordova.plugins.locationAccuracy.request(function (result) {
+                        if (result) {
+                            _this.getUserPosition().then(function (result) { return resolve(result); }, function (error) { return resolve(error); });
+                        }
+                    }, function (error) {
+                        resolve(error);
+                    }, 1);
+                }
+            }, function (error) {
+                resolve(error);
+            });
+        });
+    };
+    HomePage.prototype.askForHighAccuracy = function () {
+        return new Promise(function (resolve) {
+            cordova.plugins.locationAccuracy.request(function () {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    resolve(position);
+                }, function (error) { resolve(error); }, { timeout: 30000 });
+            }, function (error) { resolve(error); }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
         });
     };
     HomePage = __decorate([
