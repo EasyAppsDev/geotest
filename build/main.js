@@ -132,6 +132,13 @@ var HomePage = /** @class */ (function () {
             console.log("App opened from Geo Notification!", notificationData);
         };
     };
+    HomePage.prototype.cola = function () {
+        cordova.plugins.diagnostic.isGpsLocationAvailable(function (available) {
+            console.log("GPS location is " + (available ? "available" : "not available"));
+        }, function (error) {
+            console.error("The following error occurred: " + error);
+        });
+    };
     HomePage.prototype.locaa = function () {
         navigator.geolocation.getCurrentPosition(function (pos) {
             console.log('truse');
@@ -162,7 +169,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  prueba de push y geofence en un proyecto Ionic\n  <p>\n  esta prueba es para verificar que sobre las librerias para los servicios push y geofence\n  </p>\n\n  <ion-label>\n    {{ status }}\n  </ion-label>\n\n  <ion-label>\n    {{ status2 }}\n  </ion-label>\n\n  <input type="text" name="" [(ngModel)]="userData.lat" style="border:solid 1px red" placeholder="lat">\n   <input type="text" name="" [(ngModel)]="userData.lon" style="border:solid 1px red" placeholder="lon">\n   <br>\n     <input type="number" name="" [(ngModel)]="userData.tipo" style="border:solid 1px red" placeholder="tipo">\n\n        <br>\n     <input type="number" name="" [(ngModel)]="userData.id" style="border:solid 1px red" placeholder="id">\n\n  <button ion-button full (click)="addGeofence(userData)" >Add fence</button>\n    <button ion-button full (click)="ping()" >ping</button>\n        <button ion-button full (click)="oblig()" >oblig</button>\n                <button ion-button full (click)="locaa()" >lca</button>\n<!--   <button ion-button full (click)="addGeofence2()" >Add fence2</button>\n    <button ion-button full (click)="addGeofence3()" >Add fence3</button> -->\n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  prueba de push y geofence en un proyecto Ionic\n  <p>\n  esta prueba es para verificar que sobre las librerias para los servicios push y geofence\n  </p>\n\n  <ion-label>\n    {{ status }}\n  </ion-label>\n\n  <ion-label>\n    {{ status2 }}\n  </ion-label>\n\n  <input type="text" name="" [(ngModel)]="userData.lat" style="border:solid 1px red" placeholder="lat">\n   <input type="text" name="" [(ngModel)]="userData.lon" style="border:solid 1px red" placeholder="lon">\n   <br>\n     <input type="number" name="" [(ngModel)]="userData.tipo" style="border:solid 1px red" placeholder="tipo">\n\n        <br>\n     <input type="number" name="" [(ngModel)]="userData.id" style="border:solid 1px red" placeholder="id">\n\n  <button ion-button full (click)="addGeofence(userData)" >Add fence</button>\n    <button ion-button full (click)="ping()" >ping</button>\n        <button ion-button full (click)="oblig()" >oblig</button>\n                <button ion-button full (click)="locaa()" >lca</button>\n                   <button ion-button full (click)="cola()" >cola</button>\n<!--   <button ion-button full (click)="addGeofence2()" >Add fence2</button>\n    <button ion-button full (click)="addGeofence3()" >Add fence3</button> -->\n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object])
     ], HomePage);
