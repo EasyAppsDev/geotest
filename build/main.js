@@ -162,7 +162,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n \n  <p>\n   Prueba de push y geofence en un proyecto Ionic, esta prueba es para verificar que sobre las librerias para los servicios push y geofence.\n  </p>\n<br>\n  <ion-label>\n    Plugin Geofence: {{ status }}\n    <br>\n    Fence: {{ status2 }}\n  </ion-label>\n\n\n<!-- \n  <input type="text" name="" [(ngModel)]="userData.lat" style="border:solid 1px red" placeholder="lat">\n   <input type="text" name="" [(ngModel)]="userData.lon" style="border:solid 1px red" placeholder="lon">\n   <br>\n     <input type="number" name="" [(ngModel)]="userData.tipo" style="border:solid 1px red" placeholder="tipo">\n\n        <br>\n     <input type="number" name="" [(ngModel)]="userData.id" style="border:solid 1px red" placeholder="id"> -->\n\n  <button ion-button full (click)="addGeofence()" >Agregar fence</button>\n <!--   \n <button ion-button full (click)="ping()" >ping</button>\n        <button ion-button full (click)="oblig()" >oblig</button>\n                <button ion-button full (click)="locaa()" >lca</button>\n                   <button ion-button full (click)="cola()" >cola</button>\n   <button ion-button full (click)="addGeofence2()" >Add fence2</button>\n    <button ion-button full (click)="addGeofence3()" >Add fence3</button> -->\n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n \n  <p>\n   Prueba de push y geofence en un proyecto Ionic, esta prueba es para verificar que sobre las librerias para los servicios push y geofence.\n  </p>\n<br>\n  <ion-label>\n    Plugin Geofence: {{ status }}\n    <br>\n    Fence: {{ status2 }}\n  </ion-label>\n\n\n  <button ion-button full (click)="addGeofence()" >Agregar fence</button>\n \n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */]) === "function" && _b || Object])
     ], HomePage);
@@ -213,14 +213,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-/*
-  providers: [
-    StatusBar,
-    SplashScreen,
-    Geofence,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
-  */
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -283,37 +275,6 @@ var MyApp = /** @class */ (function () {
     function MyApp(platform, statusBar, splashScreen) {
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
         platform.ready().then(function () {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            /*
-            cordova.plugins.backgroundMode.setEnabled(true);
-                  cordova.plugins.backgroundMode.on('activate', function() {
-               cordova.plugins.backgroundMode.disableWebViewOptimizations();
-            });
-            cordova.plugins.backgroundMode.overrideBackButton();
-            */
-            /*
-                 if(window.geofence){
-            
-                       window.geofence.initialize().then((initStatus) => {
-                    console.log("Geofence Plugin has been initialized", initStatus);
-                    window.geofence.onTransitionReceived = function (geofences) {
-                      geofences.forEach(function (geo) {
-                        console.log("Geofence transition detected", geo);
-                      });
-                    };
-            
-            
-                    window.geofence.onNotificationClicked = function (notificationData) {
-                      console.log("App opened from Geo Notification!", notificationData);
-                    };
-                  }).catch((error) => {
-                  console.error('err');
-                    console.error(error);
-                  });
-            
-                }
-            */
             statusBar.styleDefault();
             splashScreen.hide();
         });
