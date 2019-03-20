@@ -62,24 +62,36 @@ var HomePage = /** @class */ (function () {
         this.userData = {};
     }
     HomePage.prototype.ionViewDidLoad = function () {
-        if (window.geofence) {
-            window.geofence.initialize().then(function (initStatus) {
+        navigator.geolocation.watchPosition(function (position) {
+            console.log(position);
+        }, function (error) { console.log(error); }, { enableHighAccuracy: true, timeout: 30000 });
+        /*
+             if(window.geofence){
+                          window.geofence.initialize().then((initStatus) => {
                 console.log("Geofence Plugin has been initialized", initStatus);
-                window.geofence.onTransitionReceived = function (geofences) {
-                    console.log('s2');
-                    console.log(geofences);
-                    geofences.forEach(function (geo) {
-                        console.log("Geofence transition detected", geo);
-                    });
+        
+        
+                  window.geofence.onTransitionReceived = function (geofences) {
+                  console.log('s2');
+                       console.log(geofences);
+                  geofences.forEach(function (geo) {
+                    console.log("Geofence transition detected", geo);
+                  });
                 };
-                window.geofence.onNotificationClicked = function (notificationData) {
-                    console.log("App opened from Geo Notification!", notificationData);
+        
+               window.geofence.onNotificationClicked = function (notificationData) {
+                  console.log("App opened from Geo Notification!", notificationData);
                 };
-            }).catch(function (error) {
-                console.error('err');
+        
+        
+        
+        
+              }).catch((error) => {
+              console.error('err');
                 console.error(error);
-            });
+              });
         }
+        */
     };
     /*
     
@@ -147,6 +159,9 @@ var HomePage = /** @class */ (function () {
             geofences.forEach(function (geo) {
                 console.log("Geofence transition detected", geo);
             });
+        };
+        window.geofence.onNotificationClicked = function (notificationData) {
+            console.log("App opened from Geo Notification!", notificationData);
         };
     };
     HomePage.prototype.loca = function () {
