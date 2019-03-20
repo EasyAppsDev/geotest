@@ -326,6 +326,11 @@ var MyApp = /** @class */ (function () {
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
+            cordova.plugins.backgroundMode.enable();
+            cordova.plugins.backgroundMode.on('activate', function () {
+                cordova.plugins.backgroundMode.disableWebViewOptimizations();
+            });
+            cordova.plugins.backgroundMode.overrideBackButton();
             /*
                  if(window.geofence){
             

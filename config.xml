@@ -62,7 +62,7 @@
 <plugin name="cordova-plugin-request-location-accuracy" source="npm" />
       <plugin name="cordova-plugin-geolocation"  />
         <plugin name="cordova-plugin-geofence" spec="^0.7.0" />
-
+      <plugin name="cordova-plugin-background-mode"  />
 
 
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
