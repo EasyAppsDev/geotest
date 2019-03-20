@@ -62,12 +62,21 @@ var HomePage = /** @class */ (function () {
         this.status = "";
         this.status2 = "";
         this.userData = {};
-        this.plt.ready().then(function (readySource) {
-            console.log('Platform ready from', readySource);
-            navigator.geolocation.watchPosition(function (position) {
+        /*
+          this.plt.ready().then((readySource) => {
+              console.log('Platform ready from', readySource);
+             
+        
+             navigator.geolocation.watchPosition(function(position){
                 console.log(position);
-            }, function (error) { console.log(error); }, { enableHighAccuracy: true, timeout: 30000 });
-        });
+        
+            },function(error){console.log(error)}, { enableHighAccuracy: true,timeout: 30000 });
+        
+        
+        
+        
+            });
+        */
     }
     HomePage.prototype.ionViewDidLoad = function () {
         /*
