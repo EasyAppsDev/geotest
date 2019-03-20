@@ -55,49 +55,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //import { Geofence } from '@ionic-native/geofence';
 var HomePage = /** @class */ (function () {
     function HomePage(navCtrl) {
-        // initialize the plugin
         this.navCtrl = navCtrl;
         this.status = "";
         this.status2 = "";
         this.userData = {};
     }
-    /*
-    
-      constructor(public navCtrl: NavController, private geofence: Geofence) {
-        // initialize the plugin
-        geofence.initialize().then(
-          // resolved promise does not return a value
-          () => {
-            console.log('Geofence Plugin Ready');
-    
-    
-    
-            this.addGeofence();
-          },
-          (err) => console.log(err)
-        )
-    
-    
-      }
-    
-          latitude:       -33.426143, //center of geofence radius
-        longitude:      -70.620199,
-    
-    
-    
-    */
     HomePage.prototype.addGeofence = function (dd) {
-        var _this = this;
         console.log(parseFloat(dd.lat));
         //options describing geofence
         var fence = {
             id: '69ca1b88',
-            latitude: parseFloat(dd.lat),
-            longitude: parseFloat(dd.lon),
+            latitude: 8.8948483,
+            longitude: -84.2410,
             radius: 2000,
             transitionType: 1,
             notification: {
-                id: dd.id,
+                id: 1,
                 title: 'test fogon Prov',
                 text: 'test de geofence fogon de providencia',
                 openAppOnClick: true //open app when notification is tapped
@@ -105,11 +78,9 @@ var HomePage = /** @class */ (function () {
         };
         window.geofence.addOrUpdate(fence).then(function () {
             console.log('Geofence added');
-            _this.status = 'Geofence added';
             //this.activar2();
         }, function (err) {
             console.log('Geofence failed to add');
-            _this.status = 'Geofence failed to add';
         });
     };
     HomePage.prototype.ping = function () {
@@ -270,7 +241,6 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(268);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_geofence__ = __webpack_require__(194);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -284,7 +254,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
+/*
+  providers: [
+    StatusBar,
+    SplashScreen,
+    Geofence,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
+  */
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -308,7 +285,6 @@ var AppModule = /** @class */ (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
-                __WEBPACK_IMPORTED_MODULE_7__ionic_native_geofence__["a" /* Geofence */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] }
             ]
         })
