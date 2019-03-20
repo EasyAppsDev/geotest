@@ -52,20 +52,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 //import { Geofence } from '@ionic-native/geofence';
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl) {
+    function HomePage(navCtrl, plt) {
         // initialize the plugin
         this.navCtrl = navCtrl;
+        this.plt = plt;
         this.status = "";
         this.status2 = "";
         this.userData = {};
+        this.plt.ready().then(function (readySource) {
+            console.log('Platform ready from', readySource);
+            navigator.geolocation.watchPosition(function (position) {
+                console.log(position);
+            }, function (error) { console.log(error); }, { enableHighAccuracy: true, timeout: 30000 });
+        });
     }
     HomePage.prototype.ionViewDidLoad = function () {
-        navigator.geolocation.watchPosition(function (position) {
-            console.log(position);
-        }, function (error) { console.log(error); }, { enableHighAccuracy: true, timeout: 30000 });
         /*
+        navigator.geolocation.watchPosition((position)=>{
+                console.log(position);
+        
+            },(error)=>{console.log(error)}, { enableHighAccuracy: true,timeout: 30000 });
+        
+        
              if(window.geofence){
                           window.geofence.initialize().then((initStatus) => {
                 console.log("Geofence Plugin has been initialized", initStatus);
@@ -196,10 +207,10 @@ var HomePage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      test P G\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  prueba de push y geofence en un proyecto Ionic\n  <p>\n  esta prueba es para verificar que sobre las librerias para los servicios push y geofence\n  </p>\n\n  <ion-label>\n    {{ status }}\n  </ion-label>\n\n  <ion-label>\n    {{ status2 }}\n  </ion-label>\n\n  <input type="text" name="" [(ngModel)]="userData.lat" style="border:solid 1px red" placeholder="lat">\n   <input type="text" name="" [(ngModel)]="userData.lon" style="border:solid 1px red" placeholder="lon">\n   <br>\n     <input type="number" name="" [(ngModel)]="userData.tipo" style="border:solid 1px red" placeholder="tipo">\n\n        <br>\n     <input type="number" name="" [(ngModel)]="userData.id" style="border:solid 1px red" placeholder="id">\n\n  <button ion-button full (click)="addGeofence(userData)" >Add fence</button>\n    <button ion-button full (click)="ping()" >ping</button>\n        <button ion-button full (click)="oblig()" >oblig</button>\n                <button ion-button full (click)="loca()" >lca</button>\n<!--   <button ion-button full (click)="addGeofence2()" >Add fence2</button>\n    <button ion-button full (click)="addGeofence3()" >Add fence3</button> -->\n\n</ion-content>\n'/*ion-inline-end:"/Users/jose/Documents/geofence/ionicgeo/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */]) === "function" && _b || Object])
     ], HomePage);
     return HomePage;
-    var _a;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=home.js.map
