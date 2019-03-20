@@ -155,7 +155,7 @@ var HomePage = /** @class */ (function () {
                 if (enabled) {
                     cordova.plugins.diagnostic.getLocationMode(function (locationMode) {
                         if (locationMode === HIGH_ACCURACY) {
-                            navigator.geolocation.getCurrentPosition(function (pos) {
+                            navigator.geolocation.watchPosition(function (pos) {
                                 console.log(pos);
                                 resolve({
                                     coords: {
@@ -195,7 +195,7 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.askForHighAccuracy = function () {
         return new Promise(function (resolve) {
             cordova.plugins.locationAccuracy.request(function () {
-                navigator.geolocation.getCurrentPosition(function (position) {
+                navigator.geolocation.watchPosition(function (position) {
                     resolve(position);
                 }, function (error) { resolve(error); }, { timeout: 30000 });
             }, function (error) { resolve(error); }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
