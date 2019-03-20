@@ -76,9 +76,17 @@ var HomePage = /** @class */ (function () {
         this.userData = {};
     }
     HomePage.prototype.ionViewDidLoad = function () {
+        var _this = this;
         this.getUserPosition().then(function (available) {
-            console.log('here3433');
+            console.log('GPS ok');
             console.log(available);
+            window.geofence.initialize().then(function (initStatus) {
+                console.log("Geofence Plugin has been initialized", initStatus);
+                _this.oblig();
+            }).catch(function (error) {
+                console.error('err');
+                console.error(error);
+            });
         }, function (error) { return console.log(error); });
     };
     HomePage.prototype.addGeofence = function (dd) {
