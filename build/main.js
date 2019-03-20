@@ -73,6 +73,7 @@ var HomePage = /** @class */ (function () {
         }, function (error) { return console.log(error); });
     };
     HomePage.prototype.addGeofence = function () {
+        var _this = this;
         var fence = {
             id: '69ca1b88',
             latitude: 8.8948483,
@@ -88,13 +89,14 @@ var HomePage = /** @class */ (function () {
         };
         window.geofence.addOrUpdate(fence).then(function () {
             console.log('Geofence agregado');
-            this.status2 = 'Fence agregado';
+            _this.status2 = 'Fence agregado';
         }, function (err) { console.log('Geofence failed to add'); });
     };
     HomePage.prototype.definirTransition = function () {
+        var _this = this;
         window.geofence.onTransitionReceived = function (geofences) {
-            this.status = 'Transicion detectada!';
-            this.status2 = '';
+            _this.status = 'Transicion detectada!';
+            _this.status2 = '';
             geofences.forEach(function (geo) {
                 console.log("Geofence transition detected", geo);
             });
